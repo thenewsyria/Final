@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:swap/screens/intro_screens.dart';
-import 'package:swap/widgets/header_widget.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:swap/screens/intro_screen1.dart';
+import 'package:swap/widgets/appbar_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,71 +10,82 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  static final String nameRoute = '/intro1';
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (BuildContext context) => IntroScreen1(),
-      ));
+    Timer(Duration(seconds: 6), () {
+      Navigator.pushNamed(context, nameRoute);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    double baseWidth = 375;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
     return Scaffold(
       body: Container(
-        width: 375,
+        width: double.infinity,
         height: 812,
-        decoration: BoxDecoration(
-          color: Color(0xFF0A121D),
-        ),
-        child: Stack(
-          children: [
-            HeaderWidget(),
-            Positioned(
-              top: 309,
-              left: 82,
-              child: Text(
-                'SWAP',
-                style: TextStyle(
-                    fontFamily: 'Peralta',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 60,
-                    height: 1.3,
-                    color: Color(0xFF0A121D),
-                    decorationColor: Color.fromRGBO(247, 244, 249, 0.9),
-                    decorationThickness: 8,
-                    shadows: [
-                      Shadow(
-                        color: Colors.white,
-                        offset: Offset(0, 0),
-                        blurRadius: 3,
-                        // blurStyle: BlurStyle.solid,
-                      )
-                    ],
-                    decorationStyle: TextDecorationStyle.solid),
+        child: TextButton(
+          onPressed: () {},
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+          ),
+          child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Color(0xff0a121d),
               ),
-            ),
-            Positioned(
-              top: 407,
-              left: 27,
-              child: Text(
-                'Swap Escrow Service'.toUpperCase(),
-                style: TextStyle(
-                  fontFamily: 'Questrial',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  height: 1,
-                  letterSpacing: 10,
-                  color: Color.fromRGBO(247, 244, 249, 0.9),
-                  decoration: TextDecoration.none,
-                ),
-              ),
-            ),
-          ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: EdgeInsets.fromLTRB(
+                          9.39 * fem, 0 * fem, 0 * fem, 275 * fem),
+                      width: double.infinity,
+                      height: 20 * fem,
+                      child: AppBarWidget()),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0 * fem, 0 * fem, 7.5 * fem, 20 * fem),
+                    child: Text(
+                      'SWAP',
+                      style: TextStyle(
+                        fontFamily: 'Peralta',
+                        fontSize: 60 * ffem,
+                        fontWeight: FontWeight.w400,
+                        height: 1.2925 * ffem / fem,
+                        color: Color(0xFF0A121D),
+                        shadows: [
+                          Shadow(
+                            color: Colors.white,
+                            offset: Offset(0, 0),
+                            blurRadius: 3,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(
+                        0 * fem, 0 * fem, 8.5 * fem, 0 * fem),
+                    child: Text(
+                      'SWAP ESCROW SERVICE',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Questrial',
+                        fontSize: 12 * ffem,
+                        fontWeight: FontWeight.w400,
+                        height: 1.03 * ffem / fem,
+                        letterSpacing: 10 * fem,
+                        color: Color(0xe5f7f4f9),
+                      ),
+                    ),
+                  ),
+                ],
+              )),
         ),
       ),
     );
